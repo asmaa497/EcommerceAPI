@@ -21,5 +21,11 @@ namespace EcommerceAPI.Repository
         {
             return this.context.products.ToList();
         }
+        public List<Product> GetProductsByCatID(int id)
+        {
+            return this.context.products.Where(P => P.catID == id).ToList();
+        }
+
+        
     }
 }

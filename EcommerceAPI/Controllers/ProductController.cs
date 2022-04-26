@@ -26,5 +26,11 @@ namespace EcommerceAPI.Controllers
             var product = productRepository.GetProduct(id);
             return Ok(product);
         }
+        [HttpGet("CatID")]
+        public IActionResult GetCatProducts([FromQuery]int id)
+        {
+            var product = productRepository.GetProductsByCatID(id);
+            return Ok(product);
+        }
     }
 }

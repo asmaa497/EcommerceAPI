@@ -34,7 +34,7 @@ namespace EcommerceAPI
         {
             services.AddCors(options => {
                 options.AddDefaultPolicy(builder => {
-                    builder.WithOrigins("http://localhost")
+                    builder.WithOrigins("http://localhost", "http://localhost:4200")
                     .AllowAnyHeader()
                     .AllowAnyMethod().AllowCredentials();
 

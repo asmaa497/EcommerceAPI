@@ -7,5 +7,6 @@ namespace EcommerceAPI.Repository
     {
         public List<Product> GetProducts();
         public Product GetProduct(int id);
+        public List<Product> GetProductsByCatID(int id);
     }
 }
