@@ -84,11 +84,11 @@ namespace EcommerceAPI.Controllers
                 }
                 else
                 {
-                    //return BadRequest("User NAme and PAssword Not Valid");
-                    return Unauthorized();//401
+                    return BadRequest("User NAme and PAssword Not Valid");
+                    //return Unauthorized();//401
                 }
             }
-            return Unauthorized();
+            return BadRequest("User NAme and PAssword Not Valid");
         }
         [NonAction]
         public async Task<JwtSecurityToken> GenerateToke(ApplicationUser userModel)
