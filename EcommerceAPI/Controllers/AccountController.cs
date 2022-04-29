@@ -50,7 +50,7 @@ namespace EcommerceAPI.Controllers
             IdentityResult result = await userManager.CreateAsync(userModel, registerDto.password);
             if (result.Succeeded)
             {
-                return Ok("Add Sucess");
+                return Ok(/*"Add Sucess", */registerDto);
             }
             else
             {
