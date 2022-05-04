@@ -44,6 +44,26 @@ namespace EcommerceAPI.Controllers
                 {
                    Product p= productRepository.EditProduct(id, prod);
 
+                   return Ok(p);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            return BadRequest(ModelState);
+
+        }
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                   Product p= productRepository.Delete(id);
+
                     return StatusCode(StatusCodes.Status204NoContent, p);// Created(url, dep);
                 }
                 catch (Exception ex)
@@ -54,6 +74,7 @@ namespace EcommerceAPI.Controllers
             return BadRequest(ModelState);
 
         }
+
         [HttpPost]
         public IActionResult AddNew(Product product)
         {

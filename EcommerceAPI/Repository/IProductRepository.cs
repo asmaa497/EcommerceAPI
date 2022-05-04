@@ -10,5 +10,6 @@ namespace EcommerceAPI.Repository
         public List<Product> GetProductsByCatID(int id);
         public Product EditProduct(int id, Product product);
         public void Add(Product product);
+        public Product Delete(int id);
     }
 }

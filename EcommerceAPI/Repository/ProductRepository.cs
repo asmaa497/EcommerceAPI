@@ -23,6 +23,14 @@ namespace EcommerceAPI.Repository
             
         }
 
+        public Product Delete(int id)
+        {
+            Product pro = context.products.FirstOrDefault(P => P.id == id);
+            context.products.Remove(pro);
+            context.SaveChanges();
+            return pro;
+        }
+
         public Product EditProduct(int id, Product product)
         {
             Product prodModel =
