@@ -38,20 +38,20 @@ namespace EcommerceAPI.Controllers
             ApplicationUser userModel = new ApplicationUser();
             userModel.UserName = registerDto.fullName;
             userModel.Email = registerDto.email;
-            userModel.address.city = registerDto.address.city;
-            userModel.address.street = registerDto.address.street;
-            userModel.address.postalCode = registerDto.address.postalCode;
-            foreach (var mob in registerDto.mobileNum)
-            {
-                userModel.mobileNum.Add(new Mobiles { Mobile = mob });
-            }
-            userModel.deliveryOptions = registerDto.deliveryOptions;
-            userModel.specificDays = registerDto.specificDays;
+            //userModel.address.city = registerDto.address.city;
+            //userModel.address.street = registerDto.address.street;
+            //userModel.address.postalCode = registerDto.address.postalCode;
+            //foreach (var mob in registerDto.mobileNum)
+            //{
+            //    userModel.mobileNum.Add(new Mobiles { Mobile = mob });
+            //}
+            //userModel.deliveryOptions = registerDto.deliveryOptions;
+            //userModel.specificDays = registerDto.specificDays;
 
             IdentityResult result = await userManager.CreateAsync(userModel, registerDto.password);
             if (result.Succeeded)
             {
-                return Ok("Add Sucess");
+                return Ok(result);
             }
             else
             {
@@ -71,6 +71,7 @@ namespace EcommerceAPI.Controllers
             }
             //check identityt  "Create Token" ==Cookie
             ApplicationUser userModel = await userManager.FindByNameAsync(loginDto.UserName);
+            var roles = await userManager.GetRolesAsync(userModel);
             if (userModel != null)
             {
                 if (await userManager.CheckPasswordAsync(userModel, loginDto.Password) == true)
