@@ -1,5 +1,6 @@
 ﻿using EcommerceAPI.Models;
 using EcommerceAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ namespace EcommerceAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository productRepository;
@@ -16,6 +18,7 @@ namespace EcommerceAPI.Controllers
         {
             this.productRepository = productRepository;
         }
+        
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -35,6 +38,7 @@ namespace EcommerceAPI.Controllers
             return Ok(product);
         }
         [HttpPatch("{id:int}")]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Edit(int id, Product prod)
         {
 
@@ -55,6 +59,7 @@ namespace EcommerceAPI.Controllers
 
         }
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Delete(int id)
         {
 
@@ -76,6 +81,7 @@ namespace EcommerceAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult AddNew(Product product)
         {
             if (ModelState.IsValid)

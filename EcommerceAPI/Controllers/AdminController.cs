@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,13 @@ namespace EcommerceAPI.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration configuration;
+        private readonly Context context;
 
-        public AdminController(UserManager<ApplicationUser> userManager, IConfiguration Configuration)
+        public AdminController(UserManager<ApplicationUser> userManager, IConfiguration Configuration,Context context)
         {
             this.userManager = userManager;
             configuration = Configuration;
+            this.context = context;
         }
 
         [HttpPost("Register")]
@@ -119,6 +122,13 @@ namespace EcommerceAPI.Controllers
                        new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
                 );
             return mytoken;
+        }
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            
+            var Users =this.context.Users.ToList();
+            return Ok(Users);
         }
 
 

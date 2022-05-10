@@ -17,5 +17,6 @@ namespace EcommerceAPI.Repository
         {
             return this.context.categories.ToList();
         }
+        
     }
 }
