@@ -40,6 +40,7 @@ namespace EcommerceAPI.Controllers
             userModel.address.city = registerDto.address.city;
             userModel.address.street = registerDto.address.street;
             userModel.address.postalCode = registerDto.address.postalCode;
+            userModel.Roel = Roles.User;
             foreach (var mob in registerDto.mobileNum)
             {
                 userModel.mobileNum.Add(new Mobiles { Mobile = mob });
@@ -72,7 +73,7 @@ namespace EcommerceAPI.Controllers
             ApplicationUser userModel = await userManager.FindByNameAsync(loginDto.UserName);
             if (userModel != null)
             {
-                if (await userManager.CheckPasswordAsync(userModel, loginDto.Password) == true)
+                if (await userManager.CheckPasswordAsync(userModel, loginDto.Password) == true && userModel.Roel==Roles.User)
                 {
                     //toke base on Claims "Name &Roles &id " +Jti ==>unique Key Token "String"
                     var mytoken = await GenerateToke(userModel);

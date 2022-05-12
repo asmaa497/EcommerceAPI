@@ -9,6 +9,7 @@ namespace EcommerceAPI.Models
         public List<Mobiles> mobileNum { get; set; } = new List<Mobiles>();
         public string deliveryOptions { get; set; }
         public string specificDays { get; set; }
+        public string Roel { set; get; }
 
     }
 }

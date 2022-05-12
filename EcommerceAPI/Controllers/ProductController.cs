@@ -38,7 +38,7 @@ namespace EcommerceAPI.Controllers
             return Ok(product);
         }
         [HttpPatch("{id:int}")]
-        [Authorize(Roles = Roles.Admin)]
+        
         public IActionResult Edit(int id, Product prod)
         {
 

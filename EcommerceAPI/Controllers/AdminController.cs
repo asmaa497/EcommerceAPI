@@ -41,6 +41,7 @@ namespace EcommerceAPI.Controllers
             ApplicationUser userModel = new ApplicationUser();
             userModel.UserName = registerDto.fullName;
             userModel.Email = registerDto.email;
+            userModel.Roel = Roles.Admin;
             //userModel.address.city = registerDto.address.city;
             //userModel.address.street = registerDto.address.street;
             //userModel.address.postalCode = registerDto.address.postalCode;
@@ -77,7 +78,7 @@ namespace EcommerceAPI.Controllers
             var roles = await userManager.GetRolesAsync(userModel);
             if (userModel != null)
             {
-                if (await userManager.CheckPasswordAsync(userModel, loginDto.Password) == true)
+                if (await userManager.CheckPasswordAsync(userModel, loginDto.Password) == true && userModel.Roel== Roles.Admin)
                 {
                     //toke base on Claims "Name &Roles &id " +Jti ==>unique Key Token "String"
                     var mytoken = await GenerateToke(userModel);
@@ -124,10 +125,10 @@ namespace EcommerceAPI.Controllers
             return mytoken;
         }
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public IActionResult GetAllAdmins()
         {
             
-            var Users =this.context.Users.ToList();
+            var Users =this.context.Users.Where(U=>U.Roel=="Admin").ToList();
             return Ok(Users);
         }
 
