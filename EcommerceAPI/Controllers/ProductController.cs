@@ -55,6 +55,7 @@ namespace EcommerceAPI.Controllers
                     return BadRequest(ex.Message);
                 }
             }
+            /////
             return BadRequest(ModelState);
 
         }
